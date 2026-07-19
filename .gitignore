@@ -1,0 +1,27 @@
+# Virtual Environments
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Database
+honeypot.db
+*.sqlite3
+
+# Security & Keys
+server_key
+*.pem
+*.key
+
+# IDEs & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Agent Artifacts
+walkthrough.md
