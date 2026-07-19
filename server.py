@@ -2,7 +2,7 @@ import asyncio
 import asyncssh
 import sys
 import logging
-from db import log_connection, log_interaction
+from db import log_connection, log_interaction, mark_connection_inactive
 from geoip import get_geo_data
 from ai_engine import get_ai_response
 
@@ -53,32 +53,34 @@ async def handle_client(process):
     process.stdout.write(" * Management:     https://landscape.canonical.com\n")
     process.stdout.write(" * Support:        https://ubuntu.com/pro\n\n")
     
-    connection_id = getattr(process.channel.get_connection()._server, 'connection_id', -1)
-    
-    while not process.stdin.at_eof():
-        process.stdout.write("root@server:~# ")
-        command = await process.stdin.readline()
-        if not command:
-            break
+    try:
+        while not process.stdin.at_eof():
+            process.stdout.write("root@server:~# ")
+            command = await process.stdin.readline()
+            if not command:
+                break
+                
+            command = command.strip()
+            if not command:
+                continue
+                
+            logger.info(f"Received command: {command}")
             
-        command = command.strip()
-        if not command:
-            continue
+            if command in ['exit', 'logout']:
+                process.stdout.write("logout\n")
+                process.exit(0)
+                break
+                
+            # Get AI-generated response based on the command, running in a thread to prevent blocking the async loop
+            ai_response = await asyncio.to_thread(get_ai_response, connection_id, command)
             
-        logger.info(f"Received command: {command}")
-        
-        if command in ['exit', 'logout']:
-            process.stdout.write("logout\n")
-            process.exit(0)
-            break
+            # Log to database, also in a thread
+            await asyncio.to_thread(log_interaction, connection_id, command, ai_response)
             
-        # Get AI-generated response based on the command, running in a thread to prevent blocking the async loop
-        ai_response = await asyncio.to_thread(get_ai_response, connection_id, command)
-        
-        # Log to database, also in a thread
-        await asyncio.to_thread(log_interaction, connection_id, command, ai_response)
-        
-        process.stdout.write(ai_response)
+            process.stdout.write(ai_response)
+    finally:
+        await asyncio.to_thread(mark_connection_inactive, connection_id)
+        logger.info(f"Marked connection ID {connection_id} inactive for {ip_address}")
 
 async def start_server():
     import os
