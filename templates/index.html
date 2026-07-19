@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Honeypot Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT PANEL: Hacker Terminal -->
+        <div class="panel terminal-panel">
+            <div class="panel-header">
+                <h2>Hacker Terminal (Simulated)</h2>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div class="hud-badge">ATTACKER IP: {{ client_ip }}</div>
+                    <span class="status-dot green"></span>
+                </div>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+                <div class="terminal-line">Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-101-generic x86_64)</div>
+                <div class="terminal-line"><br></div>
+            </div>
+            <div class="terminal-input-wrapper">
+                <span class="prompt">root@server:~#</span>
+                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Defender Dashboard -->
+        <div class="panel dashboard-panel">
+            <div class="dashboard-header">
+                <h1>AI Honeypot Defense Grid</h1>
+                <button id="evolve-btn" class="glow-btn">Force Persona Evolution</button>
+            </div>
+            
+            <div class="grid-layout">
+                <!-- Map Card -->
+                <div class="card map-card">
+                    <h3>Active Attacker Locations</h3>
+                    <div id="map"></div>
+                </div>
+
+                <!-- Persona Card -->
+                <div class="card persona-card">
+                    <h3>Current AI Persona</h3>
+                    <div class="code-block" id="persona-display">Loading...</div>
+                </div>
+
+                <!-- Feed Card -->
+                <div class="card feed-card">
+                    <h3>Live Threat Feed</h3>
+                    <div id="threat-feed">
+                        <!-- Feed items inserted here by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
