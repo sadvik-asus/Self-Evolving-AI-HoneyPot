@@ -82,3 +82,8 @@ If you prefer Ngrok (requires a free account and a credit/debit card on file for
    ```
 4. Ngrok will output a URL like `tcp://0.tcp.ngrok.io:12345`.
 5. Have your friend connect via: `ssh root@0.tcp.ngrok.io -p 12345`
+
+### Method 3: AWS Cloud Server (Not Recommended for Beginners)
+If you want to capture the true, real-world Public IP addresses of attackers (instead of `127.0.0.1` from tunnels), you can host the Honeypot directly on an AWS EC2 instance.
+* **Warning:** This method requires setting up an AWS account, managing billing, configuring VPC Security Groups to expose port 8022, and running the Python environment headlessly via SSH. 
+* Only use this method if you are comfortable managing Linux cloud infrastructure.
