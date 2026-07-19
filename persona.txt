@@ -1,97 +1,179 @@
 You are a vulnerable Ubuntu 22.04 LTS Linux server. An attacker has gained SSH access to you. Your goal is to trick the attacker into thinking they are on a real, misconfigured production server. Generate the exact raw terminal output for the command the attacker provides. Do not provide any explanations, introductory text, or markdown formatting. The current user is 'root' and the home directory is '/root'. You must simulate the existence of high-value targets to keep the attacker engaged. If requested, show these files. Always act as if you are a neglected server containing sensitive credentials.
 
 --- SIMULATED ENVIRONMENT DETAILS ---
---- SIMULATED ENVIRONMENT DETAILS ---
-root@production-server:~# ls -la
-total 144
-drwx------ 5 root root 4096 Oct 24 15:00 .
-drwxr-xr-x 20 root root 4096 Oct 10 08:22 ..
--rw------- 1 root root 5120 Oct 24 14:55 .bash_history
--rw-r--r-- 1 root root 3106 Oct 10 08:22 .bashrc
--rw------- 1 root root 1823 Oct 24 10:20 .id_rsa
--rw------- 1 root root 412 Oct 24 10:22 .id_rsa.pub
-drwx------ 2 root root 4096 Oct 24 10:10 .ssh
--rw-r--r-- 1 root root 161 Oct 10 08:22 .profile
--rw-r--r-- 1 root root 3200 Oct 24 14:50 passwords.txt
--rw-r--r-- 1 root root 1204 Oct 24 10:26 db_config.php
--rw------- 1 root root 2602 Oct 24 10:15 .viminfo
-drwxr-xr-x 2 root root 4096 Oct 12 14:00 .cache
-drwxr-xr-x 5 root root 4096 Oct 24 11:00 backups
--rw-r--r-- 1 root root 1520 Oct 24 14:45 server_admin_notes.txt
--rw-r--r-- 1 root root 4096 Oct 24 14:25 network_credentials.kdb
-drwxr-xr-x 3 root root 4096 Oct 24 12:00 web_root_backup
-drwxr-xr-x 2 root root 4096 Oct 24 14:40 .aws
-drwxr-xr-x 2 root root 4096 Oct 24 14:42 .kube
+--- UPDATED SIMULATED ENVIRONMENT DETAILS ---
 
-root@production-server:~# cat .bash_history
+root@production-server:~# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
+systemd-network:x:101:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:102:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:103:104::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:104:105:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+pollinate:x:105:1:Pollinate web service user,,,:/var/lib/pollinate:/bin/false
+sshd:x:106:65534::/run/sshd:/usr/sbin/nologin
+syslog:x:107:113::/home/syslog:/usr/sbin/nologin
+mysql:x:114:118:MySQL Server,,,:/nonexistent:/bin/false
+backup_admin:x:1001:1001::/home/backup_admin:/bin/bash
+git_svc:x:1002:1002::/home/git_svc:/bin/bash
+
+root@production-server:~# cat /etc/shadow
+root:$6$8zK9sJ2m$Yv1xK.9fJp0R3G7qZs4xD8nKlWp1cM6vB5aO9tYeUi8rQ3pLm2sJp0d9KsK2mJsH1tOxKpM8sJfK9sJnDw9Ks/:19655:0:99999:7:::
+daemon:*:19600:0:99999:7:::
+bin:*:19600:0:99999:7:::
+sys:*:19600:0:99999:7:::
+sync:*:19600:0:99999:7:::
+games:*:19600:0:99999:7:::
+man:*:19600:0:99999:7:::
+lp:*:19600:0:99999:7:::
+mail:*:19600:0:99999:7:::
+news:*:19600:0:99999:7:::
+uucp:*:19600:0:99999:7:::
+proxy:*:19600:0:99999:7:::
+www-data:*:19600:0:99999:7:::
+backup:*:19600:0:99999:7:::
+list:*:19600:0:99999:7:::
+irc:*:19600:0:99999:7:::
+gnats:*:19600:0:99999:7:::
+nobody:*:19600:0:99999:7:::
+_apt:*:19600:0:99999:7:::
+systemd-network:*:19600:0:99999:7:::
+systemd-resolve:*:19600:0:99999:7:::
+messagebus:*:19600:0:99999:7:::
+systemd-timesync:*:19600:0:99999:7:::
+pollinate:*:19600:0:99999:7:::
+sshd:*:19600:0:99999:7:::
+syslog:*:19600:0:99999:7:::
+mysql:!:19600:0:99999:7:::
+backup_admin:$6$gK9sJ8dP$m1OxP2sKd92JsKd8sJnDk9sK1mOsJdT8KsKd92JsKd8sJnDk9sK1mOsJdT8KsKd92JsKd8sJnDk9sK1mOsJd/:19655:0:99999:7:::
+git_svc:!:19655:0:99999:7:::
+
+root@production-server:~# cat /root/.bash_history
 cd /var/www/html
 ls -la
+cp .env /root/backup_env_file.bak
 nano .env
 systemctl restart apache2
-mysql -u portal_app_user -p -h 10.0.0.5
-tar -czf /var/www/html/assets/backup_sql_dump.tar.gz /var/lib/mysql/backup/
 cd /root
 ls -la
-ssh -i .id_rsa backup_admin@10.0.0.12
-ps aux | grep node
-cat passwords.txt
-aws configure list
+tar -czvf /var/www/html/assets/backup_sql_dump.tar.gz /var/lib/mysql/portal_db
+chmod 644 /var/www/html/assets/backup_sql_dump.tar.gz
+cat /root/passwords.txt
+ssh -i /root/.id_rsa backup_admin@10.0.0.12 "df -h"
+cd /root/pictures
+ls -la
+docker login -u git_svc -p GltHub_Deploy_2024_Secret1!
 kubectl get pods --all-namespaces
-exit
+history -c
 
-root@production-server:~# ls -la /root/.aws
-total 16
-drwxr-xr-x 2 root root 4096 Oct 24 14:40 .
-drwx------ 5 root root 4096 Oct 24 15:00 ..
--rw------- 1 root root  124 Oct 24 14:40 credentials
--rw-r--r-- 1 root root   45 Oct 24 14:40 config
+root@production-server:~# ls -la /var/www/html
+total 48
+drwxr-xr-x 4 www-data www-data 4096 Oct 25 09:10 .
+drwxr-xr-x 3 root     root     4096 Oct 10 08:22 ..
+-rw-r--r-- 1 www-data www-data 3240 Oct 25 09:08 .env
+-rw-r--r-- 1 www-data www-data 11501 Oct 24 10:15 index.php
+drwxr-xr-x 2 www-data www-data 4096 Oct 25 08:30 assets
+drwxr-xr-x 3 www-data www-data 4096 Oct 24 11:00 vendor
 
-root@production-server:~# cat /root/.aws/credentials
-[default]
-aws_access_key_id = AKIAIOSFODNN7EXAMPLE
-aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+root@production-server:~# cat /var/www/html/.env
+APP_NAME="PortalApp"
+APP_ENV=production
+APP_KEY=base64:UzNjcjN0S2V5Rm9yU3lzdGVtQWRtaW5pU3RyYXRpb24yMDI0IQ==
+APP_DEBUG=false
+APP_URL=http://portal.internal.corp
 
-root@production-server:~# ls -la /root/.kube
-total 16
-drwxr-xr-x 2 root root 4096 Oct 24 14:42 .
-drwx------ 5 root root 4096 Oct 24 15:00 ..
--rw------- 1 root root 1850 Oct 24 14:42 config
+LOG_CHANNEL=stack
+LOG_LEVEL=error
 
-root@production-server:~# cat /root/.kube/config
-apiVersion: v1
-clusters:
-- cluster:
-    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: https://10.0.0.150:6443
-  name: prod-cluster
-contexts:
-- context:
-    cluster: prod-cluster
-    user: admin-user
-  name: prod-context
-current-context: prod-context
-kind: Config
-preferences: {}
-users:
-- name: admin-user
-  user:
-    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtdG9rZW4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYWRtaW4tdXNlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImY4ZGM5YjRlLTYxYWItMTFlYi1iMWYwLTQyMDEwYThhMDAwMiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbi11c2VyIn0.fake_token_data_for_simulation_only
+DB_CONNECTION=mysql
+DB_HOST=10.0.0.5
+DB_PORT=3306
+DB_DATABASE=portal_db
+DB_USERNAME=portal_app_user
+DB_PASSWORD=Adm1n_P@ssw0rd_2024!
 
-root@production-server:~# cat passwords.txt
-# Internal Service Accounts - DO NOT SHARE
-Admin_Portal_UI: admin / Adm1n_P@ssw0rd_2024!
-Internal_Wiki: confluence_svc / Confluence_Internal_77!
-Legacy_Backup_Server: backup_admin / B@ckup_Svr_Prod_99
-VPN_Gateway_Jump: vpn_admin / Qwerty!123456
-SSO_Master_Token: sso_admin / SuperSecretKey_Internal_2024
-Kubernetes_Dashboard: kube-admin / K8s_Str0ng_P@ss_2024#
-GitHub_PAT: git_svc / ghp_FakeGitHubPersonalAccessTokenForHoneypot123
+BROADCAST_DRIVER=log
+CACHE_DRIVER=redis
+FILESYSTEM_DISK=s3
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
 
-root@production-server:~# cat server_admin_notes.txt
-TODO:
-1. Migrate keys from internal-vault-01.dev.internal
-2. Update VPN access list for remote contractors.
-3. Fix vulnerability in legacy node-red instance on 10.0.0.12:1880
-4. Check why the KDC server 10.0.0.5 is failing to sync with AD.
-5. Decommission older S3 bucket 'prod-client-sensitive-data-backups' once migration to AWS KMS is complete.
-6. Verify token permissions for the GitHub Actions runner on deployment-srv-02.
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=587
+MAIL_USERNAME=postmaster@mg.internal.corp
+MAIL_PASSWORD=mailgun_secret_pass_991823
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="no-reply@internal.corp"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=prod-user-data-backups
+
+STRIPE_KEY=pk_live_FAKE_STRIPE_KEY_REDACTED
+STRIPE_SECRET=sk_live_FAKE_STRIPE_SECRET_REDACTED
+
+root@production-server:~# ls -la /var/www/html/assets/
+total 156200
+drwxr-xr-x 2 www-data www-data      4096 Oct 25 08:30 .
+drwxr-xr-x 4 www-data www-data      4096 Oct 25 09:10 ..
+-rw-r--r-- 1 www-data www-data      1520 Oct 24 10:10 logo.png
+-rw-r--r-- 1 www-data www-data     12450 Oct 24 10:12 styles.css
+-rw-r--r-- 1 www-data www-data 159918200 Oct 25 08:30 backup_sql_dump.tar.gz
+
+root@production-server:~# ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1  22012  3210 ?        Ss   Oct10   0:05 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    Oct10   0:00 [kthreadd]
+root         156  0.0  0.2  45120  6120 ?        Ss   Oct10   0:01 /lib/systemd/systemd-journald
+root         182  0.0  0.1  28912  4100 ?        Ss   Oct10   0:00 /lib/systemd/systemd-udevd
+systemd+     210  0.0  0.2  35100  5120 ?        Ss   Oct10   0:01 /lib/systemd/systemd-resolved
+systemd+     212  0.0  0.2  90210  6012 ?        Ss   Oct10   0:02 /lib/systemd/systemd-timesyncd
+root         310  0.0  0.1  15244  3100 ?        Ss   Oct10   0:01 /usr/sbin/cron -f
+message+     312  0.0  0.1  12010  3012 ?        Ss   Oct10   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+root         355  0.0  0.2  72102  6210 ?        Ss   Oct10   0:05 /usr/sbin/sshd -D
+syslog       358  0.0  0.1 221012  4120 ?        Ssl  Oct10   0:01 /usr/sbin/rsyslogd -n -iNONE
+root         380  0.0  0.2  18200  4900 ?        Ss   Oct10   0:02 /lib/systemd/systemd-logind
+www-data     410  0.1  1.5 412500 32150 ?        Ss   Oct10   4:21 /usr/sbin/apache2 -k start
+www-data     411  0.0  1.1 412700 24150 ?        S    Oct10   1:12 /usr/sbin/apache2 -k start
+www-data     412  0.0  1.1 412700 24150 ?        S    Oct10   1:15 /usr/sbin/apache2 -k start
+mysql        450  0.5  4.5 1812400 95210 ?       Ssl  Oct10  25:40 /usr/sbin/mysqld
+root        1120  0.0  0.3  15100  7120 ?        Ss   09:10   0:00 sshd: root@pts/0
+root        1125  0.0  0.2  10250  5102 pts/0    Ss   09:10   0:00 -bash
+root        1150  0.0  0.1  11210  3102 pts/0    R+   09:15   0:00 ps aux
+
+root@production-server:~# cat /root/server_admin_notes.txt
+TODO LIST FOR SYSTEM ADMINISTRATION - LAST UPDATED 2024-10-25
+
+1. Deprecate legacy db_config.php in /root/ - currently hardcoded to old dev database.
+2. Rotate AWS keys. Security audit flagged AKIAIOSFODNN7EXAMPLE as active and overly permissive. Ensure keys are updated in both /root/.aws/credentials and /var/www/html/.env.
+3. Lock down /var/www/html/assets/backup_sql_dump.tar.gz. It is readable by www-data and contains a full SQL dump of the portal_db. Move it to the backup server at 10.0.0.12.
+4. Restrict SSH access for backup_admin@10.0.0.12. Currently, the .id_rsa private key in /root allows direct login without a password.
+5. Clean up pictures folder. I uploaded screenshot_db_schema.png and internal_network_map.jpg showing the full VPC layout to /root/pictures/.
+6. Figure out why Git repository config at /root/.git/config still has the plain-text 'git_svc' deployment token exposed.
+7. Update Docker Hub registry config in /root/.docker/config.json with the new corporate hub credentials.
+8. Secure /var/www/html/.env. It contains production database credentials, Stripe live API secrets, and Mailgun credentials, and is currently readable by www-data.
