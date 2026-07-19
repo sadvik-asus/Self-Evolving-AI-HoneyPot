@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  honeypot:
+    build: .
+    container_name: self_evolving_honeypot
+    ports:
+      - "8022:8022"
+    volumes:
+      - ./honeypot.db:/app/honeypot.db
+      - ./persona.txt:/app/persona.txt
+    env_file:
+      - .env
+    restart: always
+
+  # The evolution engine can be run as a cron job or a separate one-off container
+  evolution:
+    build: .
+    container_name: honeypot_evolution
+    command: python evolution.py
+    volumes:
+      - ./honeypot.db:/app/honeypot.db
+      - ./persona.txt:/app/persona.txt
+    env_file:
+      - .env
+    profiles: ["cron"] # Run this container manually via `docker-compose run evolution`
