@@ -64,10 +64,15 @@ def get_dashboard_data():
     except FileNotFoundError:
         persona = "No persona file found."
 
+    # Fetch unique devices count
+    device_count_res = query_db('SELECT COUNT(DISTINCT ip_address) as count FROM connections', one=True)
+    device_count = device_count_res['count'] if device_count_res else 0
+
     return jsonify({
         "connections": conn_list,
         "interactions": interact_list,
-        "persona": persona
+        "persona": persona,
+        "device_count": device_count
     })
 
 @app.route('/api/terminal', methods=['POST'])
