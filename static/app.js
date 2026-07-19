@@ -76,13 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const ipDisplay = document.getElementById('attacker-ips');
             
             if (mapHeader) {
-                mapHeader.innerText = `Attackers Detected: ${data.device_count || 0}`;
-            }
-            if (ipDisplay && data.connections.length > 0) {
-                const uniqueIPs = [...new Set(data.connections.map(c => c.ip_address))];
-                ipDisplay.innerText = `IPs: ${uniqueIPs.join(', ')}`;
-            } else if (ipDisplay) {
-                ipDisplay.innerText = `IPs: None`;
+                if (data.device_count === 0) {
+                    mapHeader.innerText = "No attackers detected";
+                    mapHeader.style.color = "#ff4444"; // Red
+                    if (ipDisplay) ipDisplay.innerText = "IPs: None";
+                } else {
+                    mapHeader.innerText = `Attackers Detected: ${data.device_count}`;
+                    mapHeader.style.color = "#00ffcc"; // Neon Green
+                    if (ipDisplay && data.active_ips && data.active_ips.length > 0) {
+                        ipDisplay.innerText = `IPs: ${data.active_ips.join(', ')}`;
+                    } else if (ipDisplay) {
+                        ipDisplay.innerText = "IPs: None";
+                    }
+                }
             }
 
             // Update Map Markers
