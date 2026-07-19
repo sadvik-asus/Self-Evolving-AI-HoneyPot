@@ -49,10 +49,36 @@ python web_app.py
 
 Now, open your web browser and go to `http://localhost:5000` to view the dashboard!
 
-## How to Test the Honeypot
+## How to Test the Honeypot Locally
 Open a third terminal and pretend to be a hacker:
 ```bash
 ssh root@localhost -p 8022
 ```
 (You can use any password you want, the honeypot will let you in!)
 Try typing `ls -la`, `whoami`, or `cat .env` and watch the AI hallucinate the responses while the dashboard logs your every move.
+
+## Exposing the Honeypot to the Internet
+If you want to trick real hackers or have your friends attack your honeypot over the internet, you can use an SSH tunneling service.
+
+### Method 1: Pinggy (Easiest - No Account Required)
+Pinggy allows you to expose the honeypot instantly without downloading any software or creating an account.
+1. Open a new terminal and run:
+   ```bash
+   ssh -p 443 -R0:localhost:8022 tcp@a.pinggy.io
+   ```
+2. Pinggy will give you a public TCP URL and port (e.g., `tcp.pinggy.io:45312`).
+3. Send this address to your friend to attack your honeypot:
+   ```bash
+   ssh root@tcp.pinggy.io -p 45312
+   ```
+
+### Method 2: Ngrok
+If you prefer Ngrok (requires a free account and a credit/debit card on file for identity verification):
+1. Download and install [Ngrok](https://ngrok.com/).
+2. Authenticate your account: `ngrok config add-authtoken <YOUR_TOKEN>`
+3. Start the TCP tunnel:
+   ```bash
+   ngrok tcp 8022
+   ```
+4. Ngrok will output a URL like `tcp://0.tcp.ngrok.io:12345`.
+5. Have your friend connect via: `ssh root@0.tcp.ngrok.io -p 12345`
