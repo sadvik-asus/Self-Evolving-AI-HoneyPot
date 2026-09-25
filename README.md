@@ -38,6 +38,25 @@ graph TD
 2. **Decoupled Architecture:** The SSH server and the Web Dashboard run as separate processes but share a lightweight SQLite database, ensuring that heavy traffic on the honeypot doesn't crash the dashboard.
 3. **Automated Evolution:** An independent evolution engine periodically analyzes captured threat data to adapt the honeypot's persona, making it a "living" trap.
 
+## Directory Structure
+
+```text
+Self-Evolving-AI-HoneyPot/
+├── static/                 # CSS, JS, and image assets for the web dashboard
+├── templates/              # HTML templates for the Sci-Fi dashboard
+├── ai_engine.py            # Interfaces with the Gemini API for command hallucination
+├── db.py                   # SQLite database initialization and log management
+├── docker-compose.yml      # Container orchestration for easy deployment
+├── Dockerfile              # Docker image build instructions
+├── evolution.py            # Background worker that analyzes logs and updates the persona
+├── geoip.py                # Resolves attacker IP addresses to physical locations
+├── persona.txt             # The current AI system prompt and environment state
+├── requirements.txt        # Python dependencies
+├── server.py               # The main AsyncSSH honeypot server process
+├── test_*.py               # Unit and integration tests for AI and SSH components
+└── web_app.py              # Flask application serving the real-time monitoring dashboard
+```
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
