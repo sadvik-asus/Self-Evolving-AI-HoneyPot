@@ -98,6 +98,14 @@ Ensure you have the following installed before setting up the honeypot:
 6. **Access the dashboard:**
    Open your browser and navigate to `http://localhost:5000`.
 
+## Environment Configuration
+
+| Variable | Type | Required | Default | Description |
+| :--- | :--- | :---: | :--- | :--- |
+| `GEMINI_API_KEY` | String | Yes | - | Your Google Gemini API Key required for generating AI responses |
+| `PORT` | Number | No | `5000` | Port for the Flask Web Dashboard |
+| `SSH_PORT` | Number | No | `8022` | Port for the AsyncSSH server |
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
