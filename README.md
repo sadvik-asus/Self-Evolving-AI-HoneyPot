@@ -141,11 +141,11 @@ To ensure the reliability of the AI honeypot and the web dashboard, use the foll
   ```
 * **Run specific AI component tests:** 
   ```bash
-  pytest test_generation.py test_api.py test_cat.py
+  pytest tests/test_generation.py tests/test_api.py tests/test_cat.py
   ```
 * **Run SSH server integration tests:** 
   ```bash
-  pytest test_asyncssh.py
+  pytest tests/test_asyncssh.py
   ```
 
 ## Docker & Deployment
