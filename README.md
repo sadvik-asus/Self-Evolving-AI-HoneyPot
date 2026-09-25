@@ -169,6 +169,21 @@ docker build -t ai-honeypot:latest .
 docker run -p 5000:5000 -p 8022:8022 --env-file .env -d ai-honeypot:latest
 ```
 
+## Operations, Troubleshooting & Governance
+
+### Common Pitfalls & Troubleshooting
+1. **Error: `google.api_core.exceptions.InvalidArgument: API key not valid`**
+   * *Fix:* Verify that your `GEMINI_API_KEY` in the `.env` file is exactly as provided by Google AI Studio, with no extra spaces.
+2. **Error: `OSError: [Errno 98] Address already in use`**
+   * *Fix:* Another application is using port 8022 or 5000. Find the process and terminate it, or change the `PORT`/`SSH_PORT` environment variables.
+3. **Error: Dashboard shows no data**
+   * *Fix:* Ensure `server.py` is running and you have actually simulated an SSH attack. The dashboard polls the SQLite database for new events.
+
+### Governance
+* [Contributing Guidelines](CONTRIBUTING.md)
+* [Security & Vulnerability Reporting](SECURITY.md)
+* [License (MIT)](LICENSE)
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
