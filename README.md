@@ -57,6 +57,47 @@ Self-Evolving-AI-HoneyPot/
 └── web_app.py              # Flask application serving the real-time monitoring dashboard
 ```
 
+## Prerequisites & Local Development Quickstart
+
+Ensure you have the following installed before setting up the honeypot:
+* **Python 3.9+**
+* **Google Gemini API Key** (Required for the AI Persona engine)
+
+### Quickstart Guide
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/Self-Evolving-AI-HoneyPot.git
+   cd Self-Evolving-AI-HoneyPot
+   ```
+2. **Create and activate a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: .\venv\Scripts\activate
+   ```
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Set up the environment variables:**
+   Create a `.env` file in the root directory and add your API key:
+   ```bash
+   echo 'GEMINI_API_KEY="your_api_key_here"' > .env
+   ```
+5. **Run the application:**
+   You will need two terminals running simultaneously:
+   
+   **Terminal 1 (SSH Server):**
+   ```bash
+   python server.py
+   ```
+   
+   **Terminal 2 (Web Dashboard):**
+   ```bash
+   python web_app.py
+   ```
+6. **Access the dashboard:**
+   Open your browser and navigate to `http://localhost:5000`.
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
