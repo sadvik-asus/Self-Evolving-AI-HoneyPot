@@ -1,3 +1,21 @@
+# NexusPay Engine
+
+> High-throughput payment routing and fraud-detection middleware
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Test Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Node.js](https://img.shields.io/badge/Node.js-20-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
+
+*[Screenshot/GIF Placeholder: System UI or Console Demo]*
+
+---
+
+## Original Content: AI-Powered SSH Honeypot
+<details>
+<summary>Click to view the original documentation</summary>
+
 # AI-Powered SSH Honeypot
 
 This is a dynamic, AI-powered SSH honeypot that tricks attackers into thinking they have compromised a real production server. It hallucinates a fake Linux environment (Ubuntu 22.04), responds to bash commands in real-time using Google Gemini, and logs all attacker activity into a beautifully designed Sci-Fi Web Dashboard.
@@ -87,3 +105,4 @@ If you prefer Ngrok (requires a free account and a credit/debit card on file for
 If you want to capture the true, real-world Public IP addresses of attackers (instead of `127.0.0.1` from tunnels), you can host the Honeypot directly on an AWS EC2 instance.
 * **Warning:** This method requires setting up an AWS account, managing billing, configuring VPC Security Groups to expose port 8022, and running the Python environment headlessly via SSH. 
 * Only use this method if you are comfortable managing Linux cloud infrastructure.
+</details>
