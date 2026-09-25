@@ -1,14 +1,23 @@
-# NexusPay Engine
+# Self-Evolving AI Honeypot
 
-> High-throughput payment routing and fraud-detection middleware
+> A dynamic, AI-driven SSH honeypot that actively hallucinates fake environments to deceive and analyze attackers in real-time.
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Test Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
+![Python Version](https://img.shields.io/badge/python-3.9+-blue)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Node.js](https://img.shields.io/badge/Node.js-20-green)
-![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
+![Docker](https://img.shields.io/badge/Docker-Supported-blue)
+![Gemini API](https://img.shields.io/badge/AI-Google_Gemini-orange)
 
-*[Screenshot/GIF Placeholder: System UI or Console Demo]*
+*[Screenshot/GIF Placeholder: Sci-Fi Web Dashboard showing live attacks]*
+
+## Problem Statement & Core Features
+
+Traditional honeypots are static and easily identifiable by modern attackers. The **Self-Evolving AI Honeypot** solves this by actively generating a dynamic persona, tricking hackers into revealing their tools and methods. By analyzing attacker behavior, it evolves to bait them deeper into the simulated environment, providing unprecedented threat intelligence.
+
+### Core Features
+* **Dynamic AI Persona (Gemini API):** Hallucinates a realistic Ubuntu 22.04 environment on the fly, creating fake `.env` files, password lists, and bash responses based on attacker inputs.
+* **Sci-Fi Web Dashboard:** An interactive, visually stunning interface to monitor global attacks, featuring a live threat feed and geographical tracking.
+* **Evolution Engine:** Continuously analyzes recent attacks to improve the honeypot's persona, making it progressively more enticing to future intruders.
 
 ---
 
