@@ -19,6 +19,25 @@ Traditional honeypots are static and easily identifiable by modern attackers. Th
 * **Sci-Fi Web Dashboard:** An interactive, visually stunning interface to monitor global attacks, featuring a live threat feed and geographical tracking.
 * **Evolution Engine:** Continuously analyzes recent attacks to improve the honeypot's persona, making it progressively more enticing to future intruders.
 
+## System Architecture & Data Flow
+
+```mermaid
+graph TD
+    Attacker[Attacker] -->|SSH / Port 8022| Server[SSH Honeypot Server]
+    Server -->|Prompt context| AI[Google Gemini API]
+    AI -->|Hallucinated bash output| Server
+    Server -->|Log Activity| DB[(SQLite Database)]
+    DB -->|Read logs| WebApp[Flask Web Dashboard]
+    WebApp -->|Render UI| Admin[Security Admin]
+    DB -->|Fetch recent attacks| Evolution[Evolution Engine]
+    Evolution -->|Analyze & Update| AI
+```
+
+### Architectural Decisions
+1. **Dynamic LLM Generation:** Instead of hardcoding a fake filesystem, we use the Google Gemini API to interpret attacker commands and generate realistic, context-aware responses on the fly.
+2. **Decoupled Architecture:** The SSH server and the Web Dashboard run as separate processes but share a lightweight SQLite database, ensuring that heavy traffic on the honeypot doesn't crash the dashboard.
+3. **Automated Evolution:** An independent evolution engine periodically analyzes captured threat data to adapt the honeypot's persona, making it a "living" trap.
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
