@@ -148,6 +148,27 @@ To ensure the reliability of the AI honeypot and the web dashboard, use the foll
   pytest test_asyncssh.py
   ```
 
+## Docker & Deployment
+
+The easiest way to deploy the AI Honeypot is using Docker, which runs both the SSH server and the Web Dashboard simultaneously in an isolated environment.
+
+**1. Using Docker Compose (Recommended):**
+```bash
+# Start the full stack in detached mode
+docker compose up --build -d
+```
+*(Make sure you have populated the `.env` file first!)*
+
+**2. Standalone Docker Run:**
+If you want to build and run the image manually without Compose:
+```bash
+# Build the image
+docker build -t ai-honeypot:latest .
+
+# Run the container (exposing ports 5000 and 8022)
+docker run -p 5000:5000 -p 8022:8022 --env-file .env -d ai-honeypot:latest
+```
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
