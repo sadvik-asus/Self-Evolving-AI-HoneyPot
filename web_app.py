@@ -7,7 +7,7 @@ from ai_engine import get_ai_response
 from db import DB_NAME, log_interaction
 from evolution import evolve_persona
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend/static', template_folder='frontend/templates')
 CORS(app)
 
 # Helper function to query the database
@@ -122,8 +122,8 @@ def trigger_evolution():
 
 if __name__ == '__main__':
     # Ensure static and templates folders exist
-    os.makedirs('static', exist_ok=True)
-    os.makedirs('templates', exist_ok=True)
+    os.makedirs('frontend/static', exist_ok=True)
+    os.makedirs('frontend/templates', exist_ok=True)
     
     # Run the web server
     print("Starting Web Dashboard on http://localhost:5000")
