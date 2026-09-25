@@ -106,6 +106,31 @@ Ensure you have the following installed before setting up the honeypot:
 | `PORT` | Number | No | `5000` | Port for the Flask Web Dashboard |
 | `SSH_PORT` | Number | No | `8022` | Port for the AsyncSSH server |
 
+## CLI / SSH Usage
+
+Since this project functions as a Honeypot rather than a standard REST API, "usage" involves connecting to it via SSH to test its deception capabilities.
+
+**Connect to the Honeypot:**
+```bash
+ssh root@localhost -p 8022
+```
+*(Note: You can use any password. The honeypot accepts all authentication attempts to lure attackers in.)*
+
+**Example Interaction:**
+```bash
+root@localhost's password: 
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-72-generic x86_64)
+root@server:~# ls -la
+drwxr-xr-x 4 root root 4096 Oct 25 10:14 .
+drwxr-xr-x 1 root root 4096 Oct 25 10:14 ..
+-rw------- 1 root root  203 Oct 25 10:14 .bash_history
+-rw------- 1 root root   45 Oct 25 10:14 .env
+root@server:~# cat .env
+DB_HOST=localhost
+DB_PASS=super_secret_db_p@ss
+```
+*Notice how the AI dynamically generated the `.env` file just because the attacker looked for it!*
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
