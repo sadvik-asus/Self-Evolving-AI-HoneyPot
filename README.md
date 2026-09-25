@@ -131,6 +131,23 @@ DB_PASS=super_secret_db_p@ss
 ```
 *Notice how the AI dynamically generated the `.env` file just because the attacker looked for it!*
 
+## Testing & Quality Assurance
+
+To ensure the reliability of the AI honeypot and the web dashboard, use the following commands to run the test suites:
+
+* **Run all tests:** 
+  ```bash
+  pytest
+  ```
+* **Run specific AI component tests:** 
+  ```bash
+  pytest test_generation.py test_api.py test_cat.py
+  ```
+* **Run SSH server integration tests:** 
+  ```bash
+  pytest test_asyncssh.py
+  ```
+
 ---
 
 ## Original Content: AI-Powered SSH Honeypot
