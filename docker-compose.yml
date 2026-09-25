@@ -8,7 +8,7 @@ services:
       - "8022:8022"
     volumes:
       - ./honeypot.db:/app/honeypot.db
-      - ./persona.txt:/app/persona.txt
+      - ./data/persona.txt:/app/data/persona.txt
     env_file:
       - .env
     restart: always
@@ -17,10 +17,10 @@ services:
   evolution:
     build: .
     container_name: honeypot_evolution
-    command: python evolution.py
+    command: python -m backend.core.evolution
     volumes:
       - ./honeypot.db:/app/honeypot.db
-      - ./persona.txt:/app/persona.txt
+      - ./data/persona.txt:/app/data/persona.txt
     env_file:
       - .env
     profiles: ["cron"] # Run this container manually via `docker-compose run evolution`

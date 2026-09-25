@@ -3,11 +3,15 @@ import os
 import asyncio
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from ai_engine import get_ai_response
-from db import DB_NAME, log_interaction
-from evolution import evolve_persona
+from backend.core.ai_engine import get_ai_response
+from backend.core.db import DB_NAME, log_interaction
+from backend.core.evolution import evolve_persona
 
-app = Flask(__name__, static_folder='frontend/static', template_folder='frontend/templates')
+import os
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+frontend_static = os.path.join(BASE_DIR, 'frontend', 'static')
+frontend_templates = os.path.join(BASE_DIR, 'frontend', 'templates')
+app = Flask(__name__, static_folder=frontend_static, template_folder=frontend_templates)
 CORS(app)
 
 # Helper function to query the database
@@ -59,7 +63,7 @@ def get_dashboard_data():
     # Fetch current persona
     persona = ""
     try:
-        with open("persona.txt", "r") as f:
+        with open("data/persona.txt", "r") as f:
             persona = f.read().strip()
     except FileNotFoundError:
         persona = "No persona file found."
@@ -90,7 +94,7 @@ def terminal_command():
     # Check if we already logged a connection for this web user
     conn = query_db('SELECT id FROM connections WHERE ip_address = ? AND port = 80', [client_ip], one=True)
     if not conn:
-        from db import log_connection
+        from backend.core.db import log_connection
         import random
         # Give them mock coordinates so they show up on the map!
         mock_geo = {
@@ -122,8 +126,8 @@ def trigger_evolution():
 
 if __name__ == '__main__':
     # Ensure static and templates folders exist
-    os.makedirs('frontend/static', exist_ok=True)
-    os.makedirs('frontend/templates', exist_ok=True)
+    os.makedirs(frontend_static, exist_ok=True)
+    os.makedirs(frontend_templates, exist_ok=True)
     
     # Run the web server
     print("Starting Web Dashboard on http://localhost:5000")

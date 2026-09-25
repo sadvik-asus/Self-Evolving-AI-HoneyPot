@@ -42,19 +42,19 @@ graph TD
 
 ```text
 Self-Evolving-AI-HoneyPot/
-├── static/                 # CSS, JS, and image assets for the web dashboard
-├── templates/              # HTML templates for the Sci-Fi dashboard
-├── ai_engine.py            # Interfaces with the Gemini API for command hallucination
-├── db.py                   # SQLite database initialization and log management
-├── docker-compose.yml      # Container orchestration for easy deployment
+├── backend/                # Python backend logic
+│   ├── api/                # Flask web dashboard (web_app.py)
+│   ├── core/               # AI, database, and geo logic (ai_engine.py, db.py, geoip.py, evolution.py)
+│   └── ssh/                # AsyncSSH honeypot server (server.py)
+├── frontend/               # UI assets
+│   ├── static/             # CSS, JS, images
+│   └── templates/          # HTML templates
+├── tests/                  # Unit and integration tests
+├── data/                   # Prompt config (persona.txt)
+├── docker-compose.yml      # Container orchestration
 ├── Dockerfile              # Docker image build instructions
-├── evolution.py            # Background worker that analyzes logs and updates the persona
-├── geoip.py                # Resolves attacker IP addresses to physical locations
-├── persona.txt             # The current AI system prompt and environment state
 ├── requirements.txt        # Python dependencies
-├── server.py               # The main AsyncSSH honeypot server process
-├── test_*.py               # Unit and integration tests for AI and SSH components
-└── web_app.py              # Flask application serving the real-time monitoring dashboard
+└── README.md               # This file
 ```
 
 ## Prerequisites & Local Development Quickstart
@@ -88,12 +88,12 @@ Ensure you have the following installed before setting up the honeypot:
    
    **Terminal 1 (SSH Server):**
    ```bash
-   python server.py
+   python -m backend.ssh.server
    ```
    
    **Terminal 2 (Web Dashboard):**
    ```bash
-   python web_app.py
+   python -m backend.api.web_app
    ```
 6. **Access the dashboard:**
    Open your browser and navigate to `http://localhost:5000`.

@@ -2,9 +2,9 @@ import asyncio
 import asyncssh
 import sys
 import logging
-from db import log_connection, log_interaction, mark_connection_inactive
-from geoip import get_geo_data
-from ai_engine import get_ai_response
+from backend.core.db import log_connection, log_interaction, mark_connection_inactive
+from backend.core.geoip import get_geo_data
+from backend.core.ai_engine import get_ai_response
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('HoneypotServer')

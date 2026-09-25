@@ -10,10 +10,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Initialize the database
-RUN python db.py
+RUN python -m backend.core.db
 
 # Expose the SSH Honeypot port
 EXPOSE 8022
 
 # Start the server
-CMD ["python", "server.py"]
+CMD ["python", "-m", "backend.ssh.server"]

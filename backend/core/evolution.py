@@ -9,7 +9,7 @@ if API_KEY:
     genai.configure(api_key=API_KEY)
 
 DB_NAME = "honeypot.db"
-PERSONA_FILE = "persona.txt"
+PERSONA_FILE = "data/persona.txt"
 
 def get_recent_commands(limit=50):
     try:

@@ -14,7 +14,7 @@ else:
 
 def get_system_prompt():
     try:
-        with open("persona.txt", "r") as f:
+        with open("data/persona.txt", "r") as f:
             return f.read().strip()
     except FileNotFoundError:
         return "You are a vulnerable Ubuntu 22.04 LTS Linux server. Generate raw terminal output."
