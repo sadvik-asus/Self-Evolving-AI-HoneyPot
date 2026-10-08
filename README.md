@@ -83,18 +83,21 @@ Ensure you have the following installed before setting up the honeypot:
    ```bash
    echo 'GEMINI_API_KEY="your_api_key_here"' > .env
    ```
-5. **Run the application:**
+5. **Run the application (via Make):**
    You will need two terminals running simultaneously:
    
    **Terminal 1 (SSH Server):**
    ```bash
-   python -m backend.ssh.server
+   make run-ssh
    ```
    
    **Terminal 2 (Web Dashboard):**
    ```bash
-   python -m backend.api.web_app
+   make run-dashboard
    ```
+   
+   *Alternatively, if you prefer Docker, see the Docker & Deployment section below.*
+   
 6. **Access the dashboard:**
    Open your browser and navigate to `http://localhost:5000`.
 
