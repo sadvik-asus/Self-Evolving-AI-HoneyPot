@@ -13,6 +13,18 @@ services:
       - .env
     restart: always
 
+  dashboard:
+    build: .
+    container_name: honeypot_dashboard
+    command: python -m backend.api.web_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./honeypot.db:/app/honeypot.db
+    env_file:
+      - .env
+    restart: always
+
   # The evolution engine can be run as a cron job or a separate one-off container
   evolution:
     build: .
