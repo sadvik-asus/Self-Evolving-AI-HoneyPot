@@ -19,6 +19,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Run Black formatter check
+      run: |
+        black --check .
+    - name: Run PyLint
+      run: |
+        pylint backend tests --disable=all --enable=E,F
     - name: Run tests
       run: |
         pytest
