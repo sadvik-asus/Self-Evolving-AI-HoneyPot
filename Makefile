@@ -21,3 +21,7 @@ docker-up:
 
 docker-down:
 	docker compose down
+
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
