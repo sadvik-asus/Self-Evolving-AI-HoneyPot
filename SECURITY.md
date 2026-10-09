@@ -7,4 +7,4 @@
 | < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
-Please report security vulnerabilities by creating a GitHub security advisory or emailing the maintainers directly. Do not open public issues for security vulnerabilities.
+Please report security vulnerabilities by creating a GitHub security advisory or emailing the maintainers directly at security@example.com. Do not open public issues for security vulnerabilities.
